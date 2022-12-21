@@ -1,0 +1,130 @@
+//////////////////////////////////
+// LOGO
+.logo {
+    height: 3.25rem;
+    margin-left: 2rem;
+}
+
+//////////////////////////////////
+// Search box
+.search {
+    flex: 0 0 40%;
+
+    display: flex; // in order to make the entire section that contain the input search bar and the search button flex
+    align-items: center; // center the elements along the cross axis
+    justify-content: center; // center the elements along the main axis
+
+    &__input {
+        font-family: inherit; // this inherited form the body selector in the __base.scss file
+        font-size: inherit; // this will be inhereted from the header element of the layout.scss
+        color: inherit; // this inherited form the body selector in the __base.scss file
+        
+
+        background-color: var(--color-grey-light-2);
+        border: none;
+        padding: .7rem 2rem;
+        border-radius: 100px;
+        width: 90%;
+        transition: all .2s;
+        margin-right: -3.25rem; // the button will move on top of the input when we try to type in the search bar
+
+        // the effect of increasing the width of the search bar when we click it to type (put it in focus), it goes from 90% to 100%
+        &:focus {
+            outline: none;
+            width: 100%;
+            background-color: var(--color-grey-light-3);
+        }
+
+        // this will change the color of the placeholder and its font
+        &::-webkit-input-placeholder {
+            font-weight: 100;
+            color: var(--color-grey-light-4);
+        }
+    }
+
+    &__input:focus + &__button {
+        background-color: var(--color-grey-light-3); 
+        // in order to make the button the same color when the search bar is clicked and in focuss
+    }
+
+    &__button {
+        border: none;
+        background-color: var(--color-grey-light-2); // same background color as the search bar
+
+        &:focus {
+            outline: none;
+        }
+
+        &:active {
+            transform: translateY(2px); // the button moves down a bit when we click it
+        }
+    }
+
+    &__icon {
+        height: 2rem;
+        width: 2rem;
+        fill: var(--color-grey-dark-3); // this is to change the color of the SVG icon
+    }
+}
+
+//////////////////////////////////
+// User Navigation
+.user-nav {
+
+    align-self: stretch; // to stretch the items along the entire main axis (the entire height of the header)
+
+    display: flex; // this will put the element of the navigation side to flex mode
+    align-items: center; // center the elements along the cross axis
+
+    /* this is used to select the direct children for .user-nav in the index.html structure, 
+    which are the first "__icon-box", the second "__icon-box", and "__user" */
+    & > * {
+        padding: 0 2rem; // 0 padding  on the top, 2rem for the left and right
+        cursor: pointer;
+        height: 100%; // in order for the hover effect below to stretch over the entire header
+        display: flex; // it is used to apply flex box in the _icon-box element that contain the icon and the span in the html file
+        align-items: center; // this is to center the flex items along the cross axis
+    }
+
+    // same as the previous selector but for when we hover over the icons
+    & > *:hover {
+        background-color: var(--color-grey-light-2);
+    }
+
+    &__icon-box {
+        position: relative; // used for the position: absolute of the __notification 
+    }
+
+    &__icon {
+        height: 2.25rem;
+        width: 2.25rem;
+        fill: var(--color-grey-dark-2);
+        
+    }
+
+    &__notification {
+        font-size: .8rem;
+        height: 1.75rem;
+        width: 1.75rem;
+        border-radius: 50%;
+        background-color: var(--color-primary);
+        color: #fff;
+
+        // position the notification number over the icons
+        position: absolute; 
+        top: 1.5rem;
+        right: 1.1rem;
+
+        // center the number of notifications in the small background red circle
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &__user-photo {
+        height: 3.75rem;
+        border-radius: 50%;
+        margin-right: 1rem;
+    }
+
+}

@@ -9,9 +9,14 @@
 }
 
 .header {
+    font-size: 1.4rem;
     height: 7rem;
     background-color: #fff;
     border-bottom: var(--color-grey-light-2);
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .content {
@@ -27,7 +32,7 @@
 }
 
 .hotel-view {
-    
+    background-color: #fff;
     background-color: orangered;
     flex: 1; // to grow the elemnt as much as it can over all the available space that the container has (82%=100%-18%)
 }
