@@ -29,10 +29,17 @@
     background-color: var(--color-grey-dark-1);
 
     flex: 0 0 18%;  // the first 0 is for the grow, the second is for the shrink, and 18% if for the width
+
+    display: flex; // in order to format the elements inside the nav bar in a flex
+    flex-direction: column; // to change the direction of the axis from left to right, to top to bottom
+    justify-content: space-between;
 }
 
 .hotel-view {
     background-color: #fff;
+
+    //for testing
     background-color: orangered;
+    height: 80rem;
     flex: 1; // to grow the elemnt as much as it can over all the available space that the container has (82%=100%-18%)
 }

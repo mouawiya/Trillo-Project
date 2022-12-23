@@ -128,3 +128,88 @@
     }
 
 }
+
+
+//////////////////////////////////
+// SIDE NAVIGATION
+
+.side-nav {
+    font-size: 1.4rem;
+    list-style: none; // remove the bullet style of the list
+    margin-top: 3.5rem;
+
+    &__item {
+        position: relative; // this is used for the position: absolute in item::before below
+
+        // add some space between the items except the last one
+        &:not(:last-child) {
+            margin-bottom: .5rem;
+        }
+    }
+
+    // add the small line on the left of the SVG icons before th animation start
+    &__item::before {
+        content: "";
+        position: absolute; // absolute in order for the small part to be on the same line as the SVG icons 
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 3px;
+        background-color: var(--color-primary);
+
+        // the samll line on the left of the SVG starts invisible
+        transform: scaleY(0);
+
+        // the transformation for the line left to the SVG icon
+        transition: transform .2s, // the transform happen in .2s
+                    width .4s cubic-bezier(1,0,0,1) .2s, // the width transformation happen over .4s with a delay of .2s; the animation speed starts fast then it slows down using the cubic-bezier  
+                    background-color .1s; // the animation of the color when we click an item on the navigation section
+    }
+
+    // add the effect of stretching to the small line left to the SVG icons when we hover 
+    &__item:hover::before,
+    &__item--active::before {
+        // the &__item--active::before is used to make the first item active by default
+        transform: scaleY(1);
+        width: 100%;
+    }
+
+    // change the color when we click a navigation section item a bit brighter
+    &__item:active::before {
+        background-color: var(--color-primary-light);
+    }
+
+    &__link:link,
+    &__link:visited {
+        color: var(--color-grey-light-1);
+        text-decoration: none;
+        text-transform: uppercase;
+        display: block;
+        padding: 1.5rem 3rem;
+
+        // to make the link nd SVG icons appear on top of the pink section when we hover it
+        position: relative;
+        z-index: 10;
+
+        // align the text and the SVG icons 
+        display: flex;
+        align-items: center;
+    }
+
+    &__icon {
+        width: 1.75rem;
+        height: 1.75rem;
+        margin-right: 2rem;
+        fill: currentColor; // change the colors of the SVG icons into the same color of the parent element so side-nav__link
+    }
+}
+
+
+//////////////////////////////////
+// LEGAL TEXT
+.legal {
+    font-size: 1.2rem;
+    color: var(--color-grey-light-4);
+    text-align: center;
+    padding: 2.5rem;
+}
