@@ -213,3 +213,124 @@
     text-align: center;
     padding: 2.5rem;
 }
+
+
+
+//////////////////////////////////
+// GALLERY
+
+.gallery{
+    display: flex; // in order for the images to be side by side
+    &__photo {
+        width: 100%; // the width in percentages in order for the image to stay fluid for the responsive design
+        display: block; // to avoid having a small space under the images; which happens when we leave it as a default inline element
+    }
+}
+
+
+//////////////////////////////////
+// HOTEL OVERVIEW
+
+.overview {
+    display: flex; // to put all the elements side by side
+    align-items: center;// vertically center the SVG icon elements in the flex box
+    border-bottom: 1px solid var(--color-grey-light-2);
+    &__heading {
+        font-size: 2.25rem;
+        font-weight: 300;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        padding: 1.5rem 3rem; //1.5rem top and bottom , 3rem left and right
+    }
+
+    &__stars {
+        /* the element only occupying the space that it needs, 
+        and the rest of the space is the automatically calculated margin*/
+        margin-right: auto; 
+        display: flex; // to get the star SVG icons perfectly centered vertically
+    }
+
+    &__icon-star,
+    &__icon-location {
+        width: 1.75rem;
+        height: 1.75rem;
+        fill: var(--color-primary);
+    }
+
+    &__location {
+        font-size: 1.2rem; // this font size will be inherited by the button
+        display: flex; // to flex box the button and the location SVG icon
+        align-items: center; // to center the elements
+    }   
+
+    &__icon-location {
+        margin-right: .5rem; // add space between SVG icon and the text "Albufeira, Portugal"
+    }
+
+    &__rating {
+        background-color: var(--color-primary);
+        margin-left: 3rem;
+        color: #fff;
+        padding: 0 2.25rem; // padding on the left and right of 2.25rem
+        align-self: stretch; // to makethe rating stretch along the entire height of the flexbox
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &__rating-average {
+        font-size: 2.25rem;
+        font-weight: 300;
+        margin-bottom: -3px; // reduce the spacing between the rating average and count
+    }
+
+    &__rating-count {
+        font-size: .8rem;
+        text-transform: uppercase;
+    }
+}
+
+//////////////////////////////////
+// BUTTON INLINE
+.btn-inline {
+    border: none;
+    color: var(--color-primary);
+    font-size: inherit; // to make it modular and re-usable for other buttons, this button inherit its font size from "&__location"
+    border-bottom: 1px solid currentColor; /* to make it have the same color as the parent element (--color-primary), 
+    and in order to make the color of the border-bottom change to the parent elemnt color when we hover*/
+    padding-bottom: 2px;
+    display: inline-block;
+    background-color: transparent; // no background color
+    cursor: pointer;
+    transition: all .2s; // transition when we hover the button and it change color
+
+    &:hover {
+        color: var(--color-grey-dark-1);
+    }
+
+    // adding the pulsating animation
+    &:focus {
+        outline: none;
+        animation: pulsate 1s infinite; // infinite: create an infinite animation as long as the button is in focus
+    }
+}
+
+// creating the pulsating animation for button
+@keyframes pulsate {
+    0% {
+        transform: scale(1);
+        box-shadow: none;
+    }
+
+    50% {
+        transform: scale(1.05);
+        box-shadow: 0 1rem 4rem rgba(0,0,0 , .25);
+    }
+    
+    100% {
+        transform: scale(1);
+        box-shadow: none;
+    }
+}
