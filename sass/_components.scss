@@ -234,7 +234,7 @@
 .overview {
     display: flex; // to put all the elements side by side
     align-items: center;// vertically center the SVG icon elements in the flex box
-    border-bottom: 1px solid var(--color-grey-light-2);
+    border-bottom: var(--line);
     &__heading {
         font-size: 2.25rem;
         font-weight: 300;
@@ -306,8 +306,19 @@
     cursor: pointer;
     transition: all .2s; // transition when we hover the button and it change color
 
+    //coding the animation for button of the review section
+    & span {
+        margin-left: 3px;
+        transition: margin-left .2s;
+    }
+
     &:hover {
         color: var(--color-grey-dark-1);
+
+        // animation when we hover the button in the the review section
+        span {
+            margin-left: 8px;
+        };
     }
 
     // adding the pulsating animation
@@ -332,5 +343,228 @@
     100% {
         transform: scale(1);
         box-shadow: none;
+    }
+}
+
+//////////////////////////////////
+// PARAGRAPH
+.paragraph:not(:last-of-type){ // we used last-of-type to select only the paragraphs
+    margin-bottom: 2rem; // give margin bottom but not for the last child (last paragraph)
+}
+
+
+
+
+//////////////////////////////////
+// LIST
+.list {
+    list-style: none; // remove the bullet style
+    margin: 3rem 0; // add top and bottom margin with 0 left and right
+    padding: 3rem 0; // add top and padding margin with 0 left and right
+    border-top: var(--line);
+    border-bottom: var(--line);
+
+    display: flex;
+    flex-wrap: wrap; // allow the elements to wrap to new lines
+
+    &__item{
+        flex: 0 0 50%; // give 50% width to each element so they can be side by side
+        margin-bottom: .7rem;
+    }
+
+    // add the SVG icons
+    &__item::before{
+        content: "";
+        display: inline-block;
+        height: 1rem;
+        width: 1rem;
+        margin-right: .7rem;
+
+        // Older browsers
+        //background-image: url(../img/chevron-thin-right.svg);
+        //background-size: cover;
+
+        //Newer browsers - masks
+        background-color: var(--color-primary);
+        -webkit-mask-image: url(../img/chevron-thin-right.svg);
+        -webkit-mask-size: cover;
+        // for when the other browsers starts implementing this as well
+        mask-image: url(../img/chevron-thin-right.svg);
+        mask-size: cover;
+    }
+}
+
+
+
+
+
+//////////////////////////////////
+// RECOMMEND
+.recommend {
+    font-size: 1.3rem;
+    color: var(--color-grey-dark-3);
+
+    display: flex;
+    align-items: center;
+
+    &__count {
+        margin-right: auto; // in order to automatcly push the images of to the right side
+    }
+
+    &__friend {
+
+    }
+
+    &__photo {
+        box-sizing: content-box; // the default is content-box ,but we changed it to border-box, which includes the border into the width and height of the element
+        // but in this case the border-box this will make the images smaller, so we used content-box, in order to add the border outside the size of the element, in order to preserve the size of the images
+        height: 4rem;
+        width: 4rem;
+        border-radius: 50%;
+        border: 3px solid #fff;
+
+        // making the images overlap each other
+        &:not(:last-child){
+            margin-right: -1.5rem;
+
+        }
+    }
+}
+
+
+//////////////////////////////////
+// REVIEWS
+.review {
+    background-color: #fff;
+    box-shadow: var(--shadow-light);
+    padding: 3rem;
+    margin-bottom: 3.5rem;
+    position: relative; // because we used position: absolute; below with the &::before
+    overflow: hidden; // in order for the quotation symbole not to be outside of the box
+    &__text {
+        margin-bottom: 2rem;
+        z-index: 10;
+        position: relative; // because we used the z-index
+    }
+
+    &__user {
+        display: flex;
+        align-items: center;
+    }
+
+    &__photo {
+        height: 4.5rem;
+        width: 4.5rem;
+        border-radius: 50%;
+        margin-right: 1.5rem;
+    }
+
+    &__user-box {
+        margin-right: auto;
+    }
+
+    &__user-name {
+        font-size: 1.1rem; 
+        font-weight: 600; // to make the text bold
+        text-transform: uppercase;
+        margin-bottom: .4rem;
+        
+    }
+
+    &__user-date {
+        font-size: 1rem;
+        color: var(--color-grey-dark-3);
+    }
+
+    &__rating {
+        color: var(--color-primary);
+        font-size: 2.2rem;
+        font-weight: 300;
+    }
+
+    // adding the quotation symble at the start of the section
+    &::before{
+        content: "\201C"; // quotation mark from the site : css-tricks.com
+        position: absolute;
+        top:-2.75rem;
+        left: -1rem;
+        line-height: 1; // decreasing the line height
+        font-size: 20rem;
+        color: var(--color-grey-light-2);
+        font-family: sans-serif; // because it is currently ineritin the open-serif font
+        z-index: 1; // a smaller z-index when compared to the text, in order for the symbole not to cover the text
+    }
+}
+
+
+
+
+//////////////////////////////////
+// CTA : CALL TO ACTION
+.cta{
+    padding: 3.5rem 0;
+    text-align: center;
+
+    &__book-now {
+        font-size: 2rem;
+        font-weight: 300;
+        text-transform: uppercase;
+        margin-bottom: 2.5rem;
+    }
+}
+
+
+//////////////////////////////////
+// THE BUTTON FOR THE CTA SECTION
+.btn {
+    font-size: 1.5rem;
+    font-weight: 300;
+    text-transform: uppercase;
+    border-radius: 100px;
+    border: none;
+    background-image: linear-gradient(to right, var(--color-primary-light), var(--color-primary-dark));
+    color: #fff;
+    position: relative; // because we used position absolute
+    overflow: hidden; // because the invisible button is overflowing the visible button before we hover, so it needs to be invisible
+    cursor: pointer; // change the cursor when we hover a button
+    & > * {
+        // we used the & > * because this code will be repeated in both &__visible and &__invisible
+        display: inline-block; // in order to be able to use the padding
+        height: 100%;
+        width: 100%;
+        transition: all .2s; // the transition when we hover over the button 
+    }
+
+    &__visible {
+        padding: 2rem 7.5rem; // 2rem top and bottom, and 7.5rem left and right
+    }
+
+    &__invisible {
+        position: absolute; // for the invisible part to be outside of the button, and ontop of the visible part
+        padding: 2rem 0;
+        // the height and width are set 100%, so that it have the same height and width of the parent element
+        left: 0;
+        top: -100%;
+    }
+
+    // when we hover the button we chane between the two sections the visible and unvisible
+
+    &:hover {
+        // change of the gradient of the button to the button when we hover
+        background-image: linear-gradient(to left, var(--color-primary-light), var(--color-primary-dark));
+    }
+
+    &:hover &__visible {
+        transform: translateY(100%); // the visible part will translate down 
+    }
+
+    &:hover &__invisible {
+        top:0; // the position of the invisible button becomes top:0 (from top:-100% --> 0: a top-down movement)
+    }
+
+    // adding the pulsating animation when we click the button
+    &:focus {
+        outline: none;
+        animation: pulsate 1s infinite;
     }
 }
