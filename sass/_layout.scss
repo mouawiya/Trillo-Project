@@ -6,6 +6,17 @@
 
     min-height: 50rem;
 
+
+    // adding media queries
+    @media only screen and (max-width: $bp-largest) {
+        margin: 0; // removing the margin from the top
+        //bp-largest: is the breaking point Scss variable defined in the base.scss file
+
+        // fixing the width to max width when lowering the size to 1100 or less, in order to hide the backround pink color
+        max-width: 100%;
+        width: 100%;
+    }
+
 }
 
 .header {
@@ -17,12 +28,22 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    // adding media queries for smallest screens (500px)
+    @media only screen and (max-width:$bp-smallest){
+        flex-wrap: wrap;    // making the seach bar jump to the another row. "wrap" : allow the flex item to wrap into a new line if they don't have enough space
+        align-content: space-around;    // making space between the elements
+        height: 11rem;  // increase the height of the header in order to fit all the elements
+    }
 }
 
 .content {
     display: flex; // define the flexbox container
 
-
+    // adding media queries
+    @media only screen and (max-width: $bp-medium) {
+        flex-direction: column; // putting the navigation on the top and the hotel overwien beneth it
+    }
 }
 
 .sidebar {
@@ -47,6 +68,16 @@
     padding: 4.5rem;
     background-color: var(--color-grey-light-1);
     border-bottom: var(--line);
+
+    // adding media queries
+    @media only screen and (max-width: $bp-medium) {
+        padding: 3rem;  // removing white space buy lowering the padding to 3 instead of 4.5 for 900px screens
+    }
+
+    // adding media queries
+    @media only screen and (max-width: $bp-small) {
+        flex-direction: column; // putting the description and user-reviews section under each other
+    }
 }
 
 .description {
@@ -56,12 +87,24 @@
     padding: 3rem;
     flex: 0 0 60%;
     margin-right: 4.5rem;
+
+    // adding media queries
+    @media only screen and (max-width: $bp-medium) {
+        padding: 2rem; // removing white space buy lowering the padding to 2 instead of 3 for 900px screens
+        margin-right: 3rem; // removing white space
+    }
+
+    // adding media queries
+    @media only screen and (max-width: $bp-small) {
+        margin-right: 0;
+        margin-bottom: 3rem;
+    }
 }
 
 .user-reviews {
     flex: 1;
 
-    // in ordet to center the button in the review section
+    // in order to center the button in the review section
     display: flex;
     flex-direction: column;
     align-items: center;

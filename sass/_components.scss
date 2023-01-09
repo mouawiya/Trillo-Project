@@ -14,6 +14,13 @@
     align-items: center; // center the elements along the cross axis
     justify-content: center; // center the elements along the main axis
 
+    // adding media queries for smallest screens (500px)
+    @media only screen and (max-width:$bp-smallest){
+        order: 1; // move the search bar to the end of the elements
+        flex: 0 0 100%; // making the flex box bigger so that it jump to another row
+        background-color: var(--color-grey-light-2);
+    }
+
     &__input {
         font-family: inherit; // this inherited form the body selector in the __base.scss file
         font-size: inherit; // this will be inhereted from the header element of the layout.scss
@@ -138,12 +145,30 @@
     list-style: none; // remove the bullet style of the list
     margin-top: 3.5rem;
 
+
+    // adding media queries
+    @media only screen and (max-width: $bp-medium) {
+        display: flex; // placing the navigation list side by side for the 900p screen
+        margin: 0;
+    }
+    
+
     &__item {
         position: relative; // this is used for the position: absolute in item::before below
 
         // add some space between the items except the last one
         &:not(:last-child) {
             margin-bottom: .5rem;
+
+            // adding media queries
+            @media only screen and (max-width: $bp-medium) {
+                margin: 0; // removing the margin from the bottom
+            }
+        }
+
+        // adding media queries
+        @media only screen and (max-width: $bp-medium) {
+            flex:1; // making the 4 navigation items selecting the full space for 900px
         }
     }
 
@@ -194,6 +219,18 @@
         // align the text and the SVG icons 
         display: flex;
         align-items: center;
+
+        // adding media queries
+        @media only screen and (max-width: $bp-medium) {
+            justify-content: center; // centering the content inside the flex items for the 900px screens
+            padding: 2rem; // adding padding
+        }
+
+        // adding media queries
+        @media only screen and (max-width: $bp-small) {
+            flex-direction: column; // make the icon on top of the text in the navigation section
+            padding: 1.5rem 1.5rem; // reducing the padding on the side
+        }
     }
 
     &__icon {
@@ -201,6 +238,16 @@
         height: 1.75rem;
         margin-right: 2rem;
         fill: currentColor; // change the colors of the SVG icons into the same color of the parent element so side-nav__link
+        
+        // adding media queries
+        @media only screen and (max-width: $bp-small) {
+
+            // centering th images on top of the text in the navigation section and adjusting its position
+            margin-right: 0;
+            margin-bottom: 7px;  
+            width: 1.5rem;
+            height: 1.5rem;
+        }
     }
 }
 
@@ -212,6 +259,11 @@
     color: var(--color-grey-light-4);
     text-align: center;
     padding: 2.5rem;
+
+    // adding media queries
+    @media only screen and (max-width: $bp-medium) {
+        display: none; // deleting the legal section
+    }
 }
 
 
@@ -241,6 +293,14 @@
         text-transform: uppercase;
         letter-spacing: 1px;
         padding: 1.5rem 3rem; //1.5rem top and bottom , 3rem left and right
+
+        // adding media queries for small screens
+        @media only screen and (max-width: $bp-small) {
+
+            // adjusting the fontsize and position of the text in the overview section
+            font-size: 1.8rem;
+            padding: 1.25rem 2rem;
+        }
     }
 
     &__stars {
@@ -278,17 +338,32 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
+
+        // adding media queries for small screens
+        @media only screen and (max-width: $bp-small) {
+            padding: 0 1.5rem; // removing white space by lowering the padding
+        }
     }
 
     &__rating-average {
         font-size: 2.25rem;
         font-weight: 300;
         margin-bottom: -3px; // reduce the spacing between the rating average and count
+
+        // adding media queries for small screens
+        @media only screen and (max-width: $bp-small) {
+            font-size: 1.8rem; // reducing font size of rating average 
+        }
     }
 
     &__rating-count {
         font-size: .8rem;
         text-transform: uppercase;
+
+        // adding media queries for small screens
+        @media only screen and (max-width: $bp-small) {
+            font-size: .5rem; // reducing font size of rating count 
+        }
     }
 }
 
@@ -380,17 +455,23 @@
         width: 1rem;
         margin-right: .7rem;
 
-        // Older browsers
-        //background-image: url(../img/chevron-thin-right.svg);
-        //background-size: cover;
+        // Older browsers (expl: firefox)
+        // for these old browsers the arrows will not be colored (just black)
+        background-image: url(../img/chevron-thin-right.svg);
+        background-size: cover;
 
-        //Newer browsers - masks
-        background-color: var(--color-primary);
-        -webkit-mask-image: url(../img/chevron-thin-right.svg);
-        -webkit-mask-size: cover;
-        // for when the other browsers starts implementing this as well
-        mask-image: url(../img/chevron-thin-right.svg);
-        mask-size: cover;
+        // feature queries for browser that can apply -webkit-mask-image and mask-image (expl: opera)
+        @supports (-webkit-mask-image: url()) or (mask-image: url()) {
+
+            //Newer browsers - masks
+            background-color: var(--color-primary);
+            -webkit-mask-image: url(../img/chevron-thin-right.svg);
+            -webkit-mask-size: cover;
+            // for when the other browsers starts implementing this as well
+            mask-image: url(../img/chevron-thin-right.svg);
+            mask-size: cover;
+            background-image: none; // to make the small arrows pink
+        }
     }
 }
 
@@ -411,8 +492,8 @@
         margin-right: auto; // in order to automatcly push the images of to the right side
     }
 
-    &__friend {
-
+    &__friends {
+        display: flex; // in order to make the images stay side by side
     }
 
     &__photo {
@@ -425,8 +506,7 @@
 
         // making the images overlap each other
         &:not(:last-child){
-            margin-right: -1.5rem;
-
+            margin-right: -2rem;
         }
     }
 }
@@ -441,6 +521,13 @@
     margin-bottom: 3.5rem;
     position: relative; // because we used position: absolute; below with the &::before
     overflow: hidden; // in order for the quotation symbole not to be outside of the box
+
+    // adding media queries
+    @media only screen and (max-width: $bp-medium) {
+        padding: 2rem; // removing white space buy lowering the padding for 900px screens
+        margin-bottom: 3rem; // removing white space buy lowering the margin for 900px screens
+    }
+
     &__text {
         margin-bottom: 2rem;
         z-index: 10;
@@ -505,6 +592,12 @@
     padding: 3.5rem 0;
     text-align: center;
 
+    // adding media queries
+    @media only screen and (max-width: $bp-medium) {
+        padding: 2.5rem 0; // removing white space by decreasing the paddin for 900px screens
+
+    }
+
     &__book-now {
         font-size: 2rem;
         font-weight: 300;
@@ -525,8 +618,8 @@
     background-image: linear-gradient(to right, var(--color-primary-light), var(--color-primary-dark));
     color: #fff;
     position: relative; // because we used position absolute
-    overflow: hidden; // because the invisible button is overflowing the visible button before we hover, so it needs to be invisible
-    cursor: pointer; // change the cursor when we hover a button
+    overflow: hidden;  // because the invisible button is overflowing the visible button before we hover, so it needs to be invisible
+    cursor: pointer;  // change the cursor when we hover a button
     & > * {
         // we used the & > * because this code will be repeated in both &__visible and &__invisible
         display: inline-block; // in order to be able to use the padding

@@ -45,6 +45,13 @@ Grey dark 3: #999
     --line: 1px solid var(--color-grey-light-2); // creating a fine line that we used multiple times
 }
 
+// adding breaking points
+$bp-largest: 75em;      // 1200px 1200/16=75
+$bp-large: 68.75em;     // 1100px 1100/16=68.75
+$bp-medium: 56.25em;    // 900px 900/16=56.25
+$bp-small: 37.5em;      // 600px 600/16=37.5
+$bp-smallest: 31.25em;  // 500px 500/16=32.25
+
 * {
     margin: 0; // remove the default margin added by the browser
     padding: 0; // remove the default padding added by the browser
@@ -59,6 +66,12 @@ Grey dark 3: #999
 html {
     box-sizing: border-box;
     font-size: 62.5%; // 1rem = 10px, 10px/16px = 62.5%
+
+
+    // adding media queries
+    @media only screen and (max-width:$bp-large){
+        font-size: 50%; // decreasing the font-size to 8px: 8/16=0.5 (50%)
+    }
 }
 
 body {
